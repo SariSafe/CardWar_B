@@ -84,6 +84,7 @@ namespace ariel
       cout << "im not here " << endl;
       throw "player cant play against himself ";
     }
+    game_getEnd();
     if (game_over)
     {
       throw " there no cards in game ";
