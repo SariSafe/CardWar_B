@@ -29,7 +29,7 @@ namespace ariel
         bool draw;
         vector<string> details_ofGame;
         vector<Card> game_stack;
-        string strResult();
+        string strResultlastTurn();
         int seconed_win_rat;
         int first_win_rat;
         bool game_over;

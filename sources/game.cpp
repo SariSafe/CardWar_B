@@ -74,7 +74,6 @@ namespace ariel
       _player1.push_to_stack(game_stack.back());
       game_stack.pop_back();
     }
-    // cout<< " stack size equal to " << this->_player0.stacksize() << endl;
   };
 
   // turn rules and logic.
@@ -85,47 +84,40 @@ namespace ariel
       cout << "im not here " << endl;
       throw "player cant play against himself ";
     }
+    int vwin = 0;
     do
     {
-      cout << " print im here " << endl;
       Card card_player0 = _player0.get_from_stack();
-      cout << " print im here 0 " << endl;
+
       Card card_player1 = _player1.get_from_stack();
-      cout << " print im here 1 " << endl;
+
       game_stack.push_back(card_player0);
-      cout << " print im here 2 " << endl;
+
       game_stack.push_back(card_player1);
-      cout << " print im here 3" << endl;
-      int vwin = identifyWinner();
+
+      vwin = identifyWinner();
+
       if (identifyWinner() == 0)
       {
-        cout << " print im here draw!! " << endl;
         num_darw++;
 
         // count the draws
         if (_player0.stacksize() != 0 && _player1.stacksize() != 0)
         {
-          cout << " print im here again to draw " << endl;
           game_stack.push_back(_player0.get_from_stack());
           game_stack.push_back(_player1.get_from_stack());
         }
       }
+      string loG_details = _player0.get_name() + "  played " + game_stack.at(game_stack.size() - 1).to_string() + "  " + _player1.get_name() + " played " + game_stack.at(game_stack.size() - 2).to_string() + " ," + strResultlastTurn();
+      details_ofGame.push_back(loG_details);
       if (_player0.stacksize() == 0 || _player1.stacksize() == 0)
       {
         game_over = true;
       }
-      dividepoints(vwin);
-      cout << " print im here  after draw" << endl;
-      game_stack.clear();
-
-      cout << " print im here  after clear" << endl;
-      string loG_details = _player0.get_name() + "  played " + game_stack.at(game_stack.size() - 1).to_string() + "  " + _player1.get_name() + " played " + game_stack.at(game_stack.size()).to_string() + " ," + strResult();
-      cout << " print im here  befor push to" << endl;
-      details_ofGame.push_back(loG_details);
-      cout << " print im here  after push" << endl;
 
     } while (identifyWinner() == 0);
-    cout << " print im here  after while" << endl;
+    dividepoints(vwin);
+    game_stack.clear();
   };
   // its done
   void Game::printLastTurn()
@@ -136,7 +128,7 @@ namespace ariel
       cout << "there throw exception" << endl;
       throw "The game has not started yet.";
     }
-    cout << details_ofGame.back() << endl;
+    cout << strResultlastTurn() << endl;
   };
   void Game::playAll()
   {
@@ -158,8 +150,13 @@ namespace ariel
   };
   void Game::printWiner()
   {
-    string nw = strResult();
-    cout << nw << endl;
+    if (_player0.cardesTaken() == _player1.cardesTaken())
+      cout << "there no winner , its draw " << endl;
+    else
+    {
+      string name = _player0.cardesTaken() > _player1.cardesTaken() ? _player0.get_name() : _player1.get_name();
+      cout << name << endl;
+    }
   };
 
   void Game::printLog()
@@ -174,16 +171,20 @@ namespace ariel
       cout << details_ofGame[i] << endl;
     }
   };
-  string Game::strResult()
+  string Game::strResultlastTurn()
   {
-    if (_player0.cardesTaken() == _player1.cardesTaken())
+    if (identifyWinner() == 1)
     {
-      return " there no winner it's Draw !!";
+      return _player0.get_name() + " is the winner";
     }
+    else if (identifyWinner() == -1)
+    {
+      return _player1.get_name() + " is the winner";
+    }
+
     else
     {
-      string name = _player0.cardesTaken() > _player1.cardesTaken() ? _player0.get_name() : _player1.get_name();
-      return name;
+      return " there no winner it's Draw !!";
     }
   };
   void Game::game_getEnd()
@@ -198,17 +199,23 @@ namespace ariel
   };
   void Game::printStats()
   {
-    cout << " the winner is :" << strResult() << " number of draw's in the game  : " << num_darw << endl;
+    string n = "";
+    if (_player0.cardesTaken() == _player1.cardesTaken())
+    {
+      n = "there no winner , its draw ";
+    }
+    n = _player0.cardesTaken() > _player1.cardesTaken() ? _player0.get_name() : _player1.get_name();
+    cout << " the winner is :" << n << " number of draw's in the game  : " << num_darw << endl;
     cout << " first palyer " << _player0.get_name() << " win rate :" << first_win_rat / 100 << endl;
     cout << " seconed palyer " << _player1.get_name() << " win rate :" << seconed_win_rat / 100 << endl;
   };
   int Game::identifyWinner()
   {
-    if (game_stack.back().value() > (*(game_stack.end() - 2)).value())
+    if (game_stack.back().value() < (*(game_stack.end() - 2)).value())
     {
       return -1; // player1
     }
-    else if ((game_stack.back()).value() < (*(game_stack.end() - 2)).value())
+    else if ((game_stack.back()).value() > (*(game_stack.end() - 2)).value())
     {
       return 1; // player0
     }
