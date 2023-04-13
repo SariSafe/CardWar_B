@@ -17,7 +17,6 @@
 #include <algorithm>
 #include <random>
 
-
 using namespace std;
 namespace ariel
 {
@@ -33,10 +32,10 @@ namespace ariel
         bool game_over;
         int num_darw;
         int number_turns;
-        int first_num_win;
-        int sec_num_win;
 
     public:
+        int first_num_win;
+        int sec_num_win;
         int identifyWinner();
         void dividepoints(int define);
         void game_getEnd();

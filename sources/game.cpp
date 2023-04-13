@@ -26,8 +26,8 @@ namespace ariel
     this->draw = false;
     this->num_darw = 0;
     this->number_turns = 0;
-    this->first_num_win = 0;
-    this->sec_num_win = 0;
+    // this->first_num_win = 0;
+    // this->sec_num_win = 0;
 
     for (int i = 1; i <= 13; i++)
     {
@@ -210,8 +210,10 @@ namespace ariel
     }
     n = _player0.cardesTaken() > _player1.cardesTaken() ? _player0.get_name() : _player1.get_name();
     cout << " the winner is :" << n << " number of draw's in the game  : " << num_darw << endl;
-    cout << " first palyer " << _player0.get_name() << " win rate :" << ((double)(first_num_win / number_turns)) * 100 << " %" << endl;
-    cout << " seconed palyer " << _player1.get_name() << " win rate :" << ((double)(sec_num_win / number_turns)) * 100 << " %" << endl;
+    double tempf = (first_num_win / number_turns) * 100;
+    cout << " first palyer " << _player0.get_name() << " win rate : " << tempf << " %" << endl;
+    double temps = (double)(sec_num_win / number_turns) * 100;
+    cout << " seconed palyer " << _player1.get_name() << " win rate : " << temps << " %" << endl;
   };
   int Game::identifyWinner()
   {
