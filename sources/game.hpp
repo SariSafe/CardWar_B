@@ -32,10 +32,10 @@ namespace ariel
         bool game_over;
         int num_darw;
         int number_turns;
-
-    public:
         int first_num_win;
         int sec_num_win;
+
+    public:
         int identifyWinner();
         void dividepoints(int define);
         void game_getEnd();
