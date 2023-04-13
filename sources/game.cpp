@@ -138,11 +138,11 @@ namespace ariel
       cout << " they cant plays against himself" << endl;
       throw "player can't play against himself ";
     }
+    game_getEnd();
     if (game_over)
     {
       throw "game is over";
     }
-    game_getEnd();
     while (!game_over)
     {
       playTurn();
