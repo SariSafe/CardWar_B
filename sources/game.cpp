@@ -22,14 +22,13 @@ namespace ariel
     {
       throw std::out_of_range("The Player maximum size start equal to  26 ");
     }
-    //---------- Initialization parameters section -----------------------------------
     this->game_over = false;
-    this->first_win_rat = 0;
-    this->seconed_win_rat = 0;
     this->draw = false;
     this->num_darw = 0;
+    this->number_turns = 0;
+    this->first_num_win = 0;
+    this->sec_num_win = 0;
 
-    // create cards
     for (int i = 1; i <= 13; i++)
     {
       game_stack.push_back(Card("Heart", i));
@@ -81,7 +80,6 @@ namespace ariel
   {
     if (_player0.get_name() == _player1.get_name())
     {
-      cout << "im not here " << endl;
       throw "player cant play against himself ";
     }
 
@@ -89,6 +87,7 @@ namespace ariel
     {
       throw " there no cards in game ";
     }
+    number_turns++;
     int vwin = 0;
     do
     {
@@ -211,21 +210,39 @@ namespace ariel
     }
     n = _player0.cardesTaken() > _player1.cardesTaken() ? _player0.get_name() : _player1.get_name();
     cout << " the winner is :" << n << " number of draw's in the game  : " << num_darw << endl;
-    cout << " first palyer " << _player0.get_name() << " win rate :" << first_win_rat / 100 << endl;
-    cout << " seconed palyer " << _player1.get_name() << " win rate :" << seconed_win_rat / 100 << endl;
+    cout << " first palyer " << _player0.get_name() << " win rate :" << ((double)(first_num_win / number_turns)) * 100 << " %" << endl;
+    cout << " seconed palyer " << _player1.get_name() << " win rate :" << ((double)(sec_num_win / number_turns)) * 100 << " %" << endl;
   };
   int Game::identifyWinner()
   {
-    if (game_stack.back().value() < (*(game_stack.end() - 2)).value())
+    // player0 ->1 player1 ->-1
+    if (game_stack.back().value() == 1 && (*(game_stack.end() - 2)).value() == 2)
     {
-      return -1; // player1
+      return -1;
+    }
+    else if (game_stack.back().value() == 2 && (*(game_stack.end() - 2)).value() == 1)
+    {
+      return 1;
+    }
+    else if (game_stack.back().value() != 2 && (*(game_stack.end() - 2)).value() == 1)
+    {
+      return -1;
+    }
+    else if (game_stack.back().value() == 1 && (*(game_stack.end() - 2)).value() != 2)
+    {
+      return 1;
+    }
+    else if (game_stack.back().value() < (*(game_stack.end() - 2)).value())
+    {
+      return -1;
     }
     else if ((game_stack.back()).value() > (*(game_stack.end() - 2)).value())
     {
-      return 1; // player0
+      return 1;
     }
     else
     {
+      // draw
       return 0;
     }
   };
@@ -234,13 +251,13 @@ namespace ariel
     if (define == 1)
     {
       _player0.increasCards(game_stack.size());
-      first_win_rat++;
+      first_num_win++;
     }
 
     if (define == -1)
     {
       _player1.increasCards(game_stack.size());
-      seconed_win_rat++;
+      sec_num_win++;
     }
     if (define == 0)
     {

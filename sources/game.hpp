@@ -30,10 +30,11 @@ namespace ariel
         vector<string> details_ofGame;
         vector<Card> game_stack;
         string strResultlastTurn();
-        int seconed_win_rat;
-        int first_win_rat;
         bool game_over;
         int num_darw;
+        int number_turns;
+        int first_num_win;
+        int sec_num_win;
 
     public:
         int identifyWinner();
@@ -41,11 +42,9 @@ namespace ariel
         void game_getEnd();
         Game(Player &player, Player &challenger);
         void playTurn();
-        //  the last element in vector of details_ofGame
         void printLastTurn();
         void playAll();
         void printWiner();
-        // print all of strings in vector from the begging to last
         void printLog();
         void printStats();
     };

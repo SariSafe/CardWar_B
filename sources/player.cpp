@@ -23,9 +23,8 @@ namespace ariel
     Card Player::get_from_stack()
     {
 
-        // return value  in stack
+        
         Card current = this->_stack.top();
-        // remove the top value
         _stack.pop();
         _size--;
         return current;

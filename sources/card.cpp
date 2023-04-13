@@ -9,7 +9,6 @@
 using namespace std;
 namespace ariel
 {
-    // init constructor
     Card::Card(const string &member, int v)
     {
         this->_name = member;
