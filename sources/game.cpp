@@ -210,9 +210,9 @@ namespace ariel
     }
     n = _player0.cardesTaken() > _player1.cardesTaken() ? _player0.get_name() : _player1.get_name();
     cout << " the winner is :" << n << " number of draw's in the game  : " << num_darw << endl;
-    double tempf = (first_num_win / number_turns) * 100;
+    double tempf = ((double)first_num_win / number_turns) * 100;
     cout << " first palyer " << _player0.get_name() << " win rate : " << tempf << " %" << endl;
-    double temps = (double)(sec_num_win / number_turns) * 100;
+    double temps = ((double)sec_num_win / number_turns) * 100;
     cout << " seconed palyer " << _player1.get_name() << " win rate : " << temps << " %" << endl;
   };
   int Game::identifyWinner()
