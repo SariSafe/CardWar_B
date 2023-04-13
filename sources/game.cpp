@@ -233,19 +233,19 @@ namespace ariel
   {
     if (define == 1)
     {
-      _player0.increasCards(game_stack.size() / 2);
+      _player0.increasCards(game_stack.size());
       first_win_rat++;
     }
 
     if (define == -1)
     {
-      _player1.increasCards(game_stack.size() / 2);
+      _player1.increasCards(game_stack.size());
       seconed_win_rat++;
     }
     if (define == 0)
     {
-      _player0.increasCards(game_stack.size());
-      _player1.increasCards(game_stack.size());
+      _player0.increasCards(game_stack.size() / 2);
+      _player1.increasCards(game_stack.size() / 2);
     }
   };
 };
