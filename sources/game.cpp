@@ -26,8 +26,8 @@ namespace ariel
     this->draw = false;
     this->num_darw = 0;
     this->number_turns = 0;
-    // this->first_num_win = 0;
-    // this->sec_num_win = 0;
+    this->first_num_win = 0;
+    this->sec_num_win = 0;
 
     for (int i = 1; i <= 13; i++)
     {

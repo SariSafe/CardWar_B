@@ -7,7 +7,6 @@
 #include <string>
 #include <iostream>
 
-
 using namespace std;
 namespace ariel
 {
@@ -16,6 +15,7 @@ namespace ariel
     private:
         string _name;
         int _value;
+
     public:
         Card(const string &name, int value);
         const string Card_name();
